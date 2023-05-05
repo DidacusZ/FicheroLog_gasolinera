@@ -1,5 +1,9 @@
 package gasolinera.servicos;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.PrintWriter;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Scanner;
 
@@ -15,7 +19,7 @@ public class ImplGasolinera implements InterfazGasolinera {
 	// matrícula del vehículo.
 
 	// Generador de id
-
+	@Override
 	public List<Gasolinera> Repostaje(List<Gasolinera> baseDatos, boolean verdad) {
 
 		// declaraciones
@@ -56,7 +60,7 @@ public class ImplGasolinera implements InterfazGasolinera {
 			System.out.print("Introduce la matricula de tu coche: ");
 			matricula = sc.next();
 
-			// guardar datos RepoFactura 
+			// guardar datos RepoFactura
 			objetoGasolinera.setDni(dni);
 			objetoGasolinera.setMatricula(matricula);
 
@@ -69,6 +73,7 @@ public class ImplGasolinera implements InterfazGasolinera {
 
 	}
 
+	@Override
 	public void MostrarRepostaje(List<Gasolinera> baseDatos, boolean verdad) {
 
 		if (verdad) {// normal
@@ -96,6 +101,7 @@ public class ImplGasolinera implements InterfazGasolinera {
 
 	}
 
+	@Override
 	public void ElimininarRepostaje(List<Gasolinera> baseDatos, int n) {
 
 		for (int i = 0; i < baseDatos.size(); i++) {
@@ -110,6 +116,7 @@ public class ImplGasolinera implements InterfazGasolinera {
 
 	}
 
+	@Override
 	public void ModificarRepostaje(List<Gasolinera> baseDatos, int n) {
 
 		Gasolinera objetoGasolinera = new Gasolinera();
@@ -154,7 +161,7 @@ public class ImplGasolinera implements InterfazGasolinera {
 					objetoGasolinera.setMatricula(matricula);
 					objetoGasolinera.setRepoVerdad(false);
 				}
-				
+
 				if (baseDatos.get(i).getRepoVerdad() == true)
 					objetoGasolinera.setRepoVerdad(true);
 
@@ -183,6 +190,56 @@ public class ImplGasolinera implements InterfazGasolinera {
 			}
 		}
 		return auxiliar + 1;
+	}
+
+	//
+	// FICHEROS
+	//
+
+	@Override
+	public void AbrirFichero(File archivo, String mensaje) {
+
+		// Creamos el fr para luego en el try controlar si se abre bien o no
+		FileWriter fichero = null;
+
+		try {
+			fichero = new FileWriter(archivo, true);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		EscribirFichero(fichero, mensaje);
+	}
+
+	@Override
+	public void EscribirFichero(FileWriter fichero, String mensaje) {
+
+		LocalDateTime fechaHoraActual = LocalDateTime.now();
+		try {
+			PrintWriter pw = new PrintWriter(fichero, true);
+
+			// pw.println("================================================================================================");
+			pw.println("[" + fechaHoraActual + "] " + mensaje);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			CerrarFichero(fichero);
+		}
+
+	}
+
+	@Override
+	public void CerrarFichero(FileWriter fichero) {
+
+		try {
+			// Nuevamente aprovechamos el finally para
+			// asegurarnos que se cierra el fichero.
+			if (null != fichero)
+				fichero.close();
+		} catch (Exception e2) {
+			e2.printStackTrace();
+		}
 	}
 
 }
