@@ -62,4 +62,5 @@ public interface InterfazGasolinera {
 	 * @param fichero
 	 */
 	public void CerrarFichero(FileWriter fichero);
+
 }

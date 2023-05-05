@@ -77,6 +77,7 @@ public class Gasolinera {
 	}
 
 	// constructor con parametros
+	/*
 	public Gasolinera(int id, String dni, String fecha, String matricula, double litros, double importe) {
 		super();
 		this.id = id;
@@ -86,6 +87,7 @@ public class Gasolinera {
 		this.litros = litros;
 		this.importe = importe;
 	}
+	*/
 
 	// constructor vacio
 	public Gasolinera() {

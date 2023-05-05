@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.time.LocalDateTime;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -20,8 +21,24 @@ public class ImplGasolinera implements InterfazGasolinera {
 
 	// Generador de id
 	@Override
-	public List<Gasolinera> Repostaje(List<Gasolinera> baseDatos, boolean verdad) {
+	public List<Gasolinera> Repostaje(List<Gasolinera> baseDatos, boolean verdad /*, File archivo*/ ) {
 
+		/*
+		try {
+			
+		}catch(InputMismatchException e){
+			 
+			 AbrirFichero(archivo,mensajes.getFormatoERR());
+		 }catch(Exception e) {
+				System.out.println("Se produjo un error"+e.getMessage());
+			}
+		baseDatos.add(objetoGasolinera);
+		if(baseDatos.size()>taman)
+			AbrirFichero(archivo,mensajes.getAgregarRepos());
+		else
+			AbrirFichero(archivo,mensajes.getAgregarReposERR());
+		*/
+		
 		// declaraciones
 		Gasolinera objetoGasolinera = new Gasolinera();
 
